@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 
 public class follower : MonoBehaviour
 {
@@ -11,22 +12,48 @@ public class follower : MonoBehaviour
     public GameObject Follower;
     public float FollowSpeed;
     public RaycastHit Shot;
+    public GameObject MainCamera;
+    public GameObject FallDownCamera;
+    bool flag = false;
+    PlayableDirector playableDirector;
 
+    private void Start()
+    {
+        playableDirector = FallDownCamera.GetComponent<PlayableDirector>();
+    }
     void Update()
     {
         transform.LookAt(Player.transform);
         TargetDistance = Shot.distance;
-        FollowSpeed = .015f;
+        FollowSpeed = .015f; //0.015
         Vector3 target = Player.transform.position;
         target.y = 0;
-
+        
         float dist = Vector3.Distance(transform.position, Player.transform.position);
-        //Debug.Log(dist);
-        if (dist <= 4) 
+        
+        if (dist <= 4 && !flag) 
         {
-            SceneManager.LoadScene(1);
+            flag = true;
+            MainCamera.SetActive(false);
+            FallDownCamera.transform.position = MainCamera.transform.position;
+            FallDownCamera.transform.rotation = MainCamera.transform.rotation;
+
+            FallDownCamera.SetActive(true);
+            //Animator animator = FallDownCamera.GetComponent<Animator>();
+            //animator.enabled = true;
+            //SceneManager.LoadScene(1);
+            playableDirector.Play();
+            StartCoroutine(LoadSceneCoroutine());
+
         }
+  
 
         transform.position = Vector3.MoveTowards(transform.position, target, FollowSpeed);
+    }
+
+    IEnumerator LoadSceneCoroutine()
+    {
+        yield return new WaitForSeconds(1.1f);
+        SceneManager.LoadScene(1);
     }
 }

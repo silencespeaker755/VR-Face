@@ -37,11 +37,8 @@ public class WalkingSpawner : MonoBehaviour
             //if (!Physics.CheckSphere(spawnPoint2, checkRadius, 1 << 14))
             {
                 objectPooler.SpawnFromPool("TextingAndWalking", spawnPoint2, Quaternion.identity);
-            } 
-            //else
-            {
-                //Debug.Log("overlap");
             }
+
         }
         
         counter++;
