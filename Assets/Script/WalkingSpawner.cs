@@ -18,7 +18,7 @@ public class WalkingSpawner : MonoBehaviour
         {
             //float xOffset = Random.Range(3, 10) * (Random.Range(0, 2) * 2 - 1);
             //float zOffset = Random.Range(0, 5);
-            float xOffset = ((counter / 20) % 15 + 5) * (Random.Range(0, 2) * 2 - 1);
+            float xOffset = ((counter / 20) % 10);
             float zOffset = 0;
 
             Vector3 spawnPoint = transform.position + new Vector3(xOffset, 0, zOffset);
@@ -30,7 +30,7 @@ public class WalkingSpawner : MonoBehaviour
 
             //float xOffset2 = Random.Range(3, 10) * (Random.Range(0, 2) * 2 - 1);
             //float zOffset2 = Random.Range(0, 5);
-            float xOffset2 = ((counter / 20) + 2) % 10 * (Random.Range(0, 2) * 2 - 1);
+            float xOffset2 = ((counter / 20) + 2) % 10;
             float zOffset2 = 0;
             Vector3 spawnPoint2 = transform.position + new Vector3(xOffset2, 0, zOffset2);
 
