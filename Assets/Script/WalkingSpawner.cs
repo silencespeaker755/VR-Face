@@ -14,11 +14,11 @@ public class WalkingSpawner : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (counter % 30 == 0)
+        if (counter % 15 == 0)
         {
             //float xOffset = Random.Range(3, 10) * (Random.Range(0, 2) * 2 - 1);
             //float zOffset = Random.Range(0, 5);
-            float xOffset = ((counter / 20) % 10);
+            float xOffset = ((counter / 15) % 5) * (Random.Range(0, 2) * 2 - 1);
             float zOffset = 0;
 
             Vector3 spawnPoint = transform.position + new Vector3(xOffset, 0, zOffset);
@@ -36,7 +36,7 @@ public class WalkingSpawner : MonoBehaviour
 
             //if (!Physics.CheckSphere(spawnPoint2, checkRadius, 1 << 14))
             {
-                objectPooler.SpawnFromPool("TextingAndWalking", spawnPoint2, Quaternion.identity);
+                //objectPooler.SpawnFromPool("TextingAndWalking", spawnPoint2, Quaternion.identity);
             }
 
         }

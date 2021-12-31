@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pedestrian : MonoBehaviour
 {
-    public float speed = 1.5f;
+    public float speed = 1.3f;
 
     // Update is called once per frame
     void FixedUpdate()
