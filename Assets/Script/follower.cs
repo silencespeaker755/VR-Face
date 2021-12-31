@@ -21,11 +21,11 @@ public class follower : MonoBehaviour
     {
         playableDirector = FallDownCamera.GetComponent<PlayableDirector>();
     }
-    void Update()
+    void FixedUpdate()
     {
         transform.LookAt(Player.transform);
         TargetDistance = Shot.distance;
-        FollowSpeed = .015f; //0.015
+        FollowSpeed = .02f; //0.015
         Vector3 target = Player.transform.position;
         target.y = 0;
         
@@ -39,15 +39,10 @@ public class follower : MonoBehaviour
             FallDownCamera.transform.rotation = MainCamera.transform.rotation;
 
             FallDownCamera.SetActive(true);
-            //Animator animator = FallDownCamera.GetComponent<Animator>();
-            //animator.enabled = true;
-            //SceneManager.LoadScene(1);
             playableDirector.Play();
             StartCoroutine(LoadSceneCoroutine());
 
         }
-  
-
         transform.position = Vector3.MoveTowards(transform.position, target, FollowSpeed);
     }
 
