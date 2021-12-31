@@ -25,7 +25,7 @@ public class follower : MonoBehaviour
     {
         transform.LookAt(Player.transform);
         TargetDistance = Shot.distance;
-        FollowSpeed = .015f; //0.015
+        FollowSpeed = .02f; //0.015
         Vector3 target = Player.transform.position;
         target.y = 0;
         
