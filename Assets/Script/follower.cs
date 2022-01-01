@@ -14,6 +14,7 @@ public class follower : MonoBehaviour
     public RaycastHit Shot;
     public GameObject MainCamera;
     public GameObject FallDownCamera;
+    public GameObject MainCharacter;
     bool flag = false;
     PlayableDirector playableDirector;
 
@@ -31,10 +32,11 @@ public class follower : MonoBehaviour
         
         float dist = Vector3.Distance(transform.position, Player.transform.position);
         
-        if (dist <= 1 && !flag) 
+        if (dist <= 1.2 && !flag) 
         {
             flag = true;
             MainCamera.SetActive(false);
+            MainCharacter.SetActive(false);
             FallDownCamera.transform.position = MainCamera.transform.position;
             FallDownCamera.transform.rotation = MainCamera.transform.rotation;
 
