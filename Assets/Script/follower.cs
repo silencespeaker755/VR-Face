@@ -35,11 +35,12 @@ public class follower : MonoBehaviour
         if (dist <= 1.2 && !flag) 
         {
             flag = true;
-            MainCamera.SetActive(false);
-            MainCharacter.SetActive(false);
             FallDownCamera.transform.position = MainCamera.transform.position;
             FallDownCamera.transform.rotation = MainCamera.transform.rotation;
 
+            MainCamera.SetActive(false);
+            MainCharacter.SetActive(false);
+            
             FallDownCamera.SetActive(true);
             playableDirector.Play();
             StartCoroutine(LoadSceneCoroutine());
