@@ -25,13 +25,13 @@ public class follower : MonoBehaviour
     {
         transform.LookAt(Player.transform);
         TargetDistance = Shot.distance;
-        FollowSpeed = .02f; //0.015
+        FollowSpeed = .015f; //0.015
         Vector3 target = Player.transform.position;
         target.y = 0;
         
         float dist = Vector3.Distance(transform.position, Player.transform.position);
         
-        if (dist <= 4 && !flag) 
+        if (dist <= 1 && !flag) 
         {
             flag = true;
             MainCamera.SetActive(false);
