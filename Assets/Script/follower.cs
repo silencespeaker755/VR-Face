@@ -15,6 +15,8 @@ public class follower : MonoBehaviour
     public GameObject MainCamera;
     public GameObject FallDownCamera;
     public GameObject MainCharacter;
+    public Camera cam;
+    bool start = false;
     bool flag = false;
     PlayableDirector playableDirector;
 
@@ -22,31 +24,52 @@ public class follower : MonoBehaviour
     {
         playableDirector = FallDownCamera.GetComponent<PlayableDirector>();
     }
+    private bool IsVisible(Camera c, GameObject target)
+    {
+        var planes = GeometryUtility.CalculateFrustumPlanes(c);
+        var point = target.transform.position;
+
+        foreach (var plane in planes)
+        {
+            if (plane.GetDistanceToPoint(point) < 0) return false;
+        }
+        return true;
+    }
+    private void Update()
+    {
+        if (IsVisible(cam, gameObject))
+        {
+            start = true;
+        }
+    }
     void FixedUpdate()
     {
-        transform.LookAt(Player.transform);
-        TargetDistance = Shot.distance;
-        FollowSpeed = .015f; //0.015
-        Vector3 target = Player.transform.position;
-        target.y = 0;
-        
-        float dist = Vector3.Distance(transform.position, Player.transform.position);
-        
-        if (dist <= 1.2 && !flag) 
+        if (start)
         {
-            flag = true;
-            FallDownCamera.transform.position = MainCamera.transform.position;
-            FallDownCamera.transform.rotation = MainCamera.transform.rotation;
+            transform.LookAt(Player.transform);
+            TargetDistance = Shot.distance;
+            FollowSpeed = .015f; //0.015
+            Vector3 target = Player.transform.position;
+            target.y = 0;
 
-            MainCamera.SetActive(false);
-            MainCharacter.SetActive(false);
-            
-            FallDownCamera.SetActive(true);
-            playableDirector.Play();
-            StartCoroutine(LoadSceneCoroutine());
+            float dist = Vector3.Distance(transform.position, Player.transform.position);
 
+            if (dist <= 1.2 && !flag)
+            {
+                flag = true;
+                FallDownCamera.transform.position = MainCamera.transform.position;
+                FallDownCamera.transform.rotation = MainCamera.transform.rotation;
+
+                MainCamera.SetActive(false);
+                MainCharacter.SetActive(false);
+
+                FallDownCamera.SetActive(true);
+                playableDirector.Play();
+                StartCoroutine(LoadSceneCoroutine());
+
+            }
+            transform.position = Vector3.MoveTowards(transform.position, target, FollowSpeed);
         }
-        transform.position = Vector3.MoveTowards(transform.position, target, FollowSpeed);
     }
 
     IEnumerator LoadSceneCoroutine()
