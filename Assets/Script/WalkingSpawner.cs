@@ -14,15 +14,16 @@ public class WalkingSpawner : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (counter % 15 == 0)
+        if (counter % 50 == 0)
         {
             //float xOffset = Random.Range(3, 10) * (Random.Range(0, 2) * 2 - 1);
             //float zOffset = Random.Range(0, 5);
             float xOffset = ((counter / 15) % 4) * 1.5f * (Random.Range(0, 2) * 2 - 1);
             float zOffset = 0;
 
-            Vector3 spawnPoint = transform.position + new Vector3(xOffset, 0, zOffset);
-            
+            //Vector3 spawnPoint = transform.position + new Vector3(xOffset, 0, zOffset);
+            Vector3 spawnPoint = transform.position;
+
             if (!Physics.CheckSphere(spawnPoint, checkRadius, 1 << 14))
             {
                objectPooler.SpawnFromPool("Walking", spawnPoint, Quaternion.identity);
