@@ -51,7 +51,7 @@ public class follower : MonoBehaviour
 
     IEnumerator LoadSceneCoroutine()
     {
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1.25f);
         SceneManager.LoadScene(1);
     }
 }
