@@ -37,7 +37,7 @@ public class WalkingSpawner : MonoBehaviour
             {
                 colorAdjustments.saturation.value -= 0.2f;
             }
-            if (counter % 50 == 0)
+            if (counter % 30 == 0)
             {
                 //float xOffset = Random.Range(3, 10) * (Random.Range(0, 2) * 2 - 1);
                 //float zOffset = Random.Range(0, 5);

@@ -19,7 +19,7 @@ public class follower : MonoBehaviour
     bool start = false;
     bool flag = false;
     PlayableDirector playableDirector;
-
+    
     private void Start()
     {
         playableDirector = FallDownCamera.GetComponent<PlayableDirector>();
@@ -58,7 +58,9 @@ public class follower : MonoBehaviour
             {
                 flag = true;
                 FallDownCamera.transform.position = MainCamera.transform.position;
-                FallDownCamera.transform.rotation = MainCamera.transform.rotation;
+                //FallDownCamera.transform.rotation = MainCamera.transform.rotation;
+                FallDownCamera.transform.eulerAngles = MainCamera.transform.eulerAngles;
+                //FallDownCamera.transform.eulerAngles = new Vector3(MainCamera.transform.eulerAngles.x, MainCamera.transform.eulerAngles.y - 180, MainCamera.transform.eulerAngles.z);
 
                 MainCamera.SetActive(false);
                 MainCharacter.SetActive(false);
