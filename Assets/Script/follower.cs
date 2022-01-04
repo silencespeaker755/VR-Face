@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Playables;
+using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class follower : MonoBehaviour
 {
@@ -19,7 +21,15 @@ public class follower : MonoBehaviour
     bool start = false;
     bool flag = false;
     PlayableDirector playableDirector;
-    
+    public XRBaseController LeftHand;
+    public XRBaseController RightHand;
+
+
+    void ActivateHaptic()
+    {
+        RightHand.SendHapticImpulse(1f, 1.5f);
+        LeftHand.SendHapticImpulse(1f, 1.5f);
+    }
     private void Start()
     {
         playableDirector = FallDownCamera.GetComponent<PlayableDirector>();
@@ -68,7 +78,7 @@ public class follower : MonoBehaviour
                 FallDownCamera.SetActive(true);
                 playableDirector.Play();
                 StartCoroutine(LoadSceneCoroutine());
-
+                ActivateHaptic();
             }
             transform.position = Vector3.MoveTowards(transform.position, target, FollowSpeed);
         }
