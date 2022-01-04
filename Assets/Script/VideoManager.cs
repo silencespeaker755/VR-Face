@@ -5,10 +5,12 @@ using UnityEngine;
 public class VideoManager : MonoBehaviour
 {
     UnityEngine.Video.VideoPlayer videoPlayer;
+    public GameObject Screen;
     public GameObject Character;
     public GameObject spotLight;
     public GameObject plane;
     public GameObject cam;
+    public GameObject FallDownCamera;
     bool isDestroyed = false;
     void Start()
     {
@@ -19,16 +21,23 @@ public class VideoManager : MonoBehaviour
     void FixedUpdate()
     {
         if (isDestroyed) return;
+        if (videoPlayer.frame == (long)videoPlayer.frameCount - 3) // HCAK
+        {
+            cam.SetActive(true);
+        }
         if (videoPlayer.frame == (long)videoPlayer.frameCount-1) // HACK: -1
         {
             Destroy(videoPlayer);
+            Destroy(Screen);
             isDestroyed = true;
             Character.SetActive(true);
             spotLight.SetActive(true);
             plane.SetActive(true);
+            FallDownCamera.SetActive(false);
 
             spotLight.transform.position = cam.transform.position + 6 * cam.transform.forward;
             spotLight.transform.position = new Vector3(spotLight.transform.position.x, 5.1f, spotLight.transform.position.z);
+            spotLight.transform.eulerAngles = new Vector3(spotLight.transform.eulerAngles.x, cam.transform.eulerAngles.y, spotLight.transform.eulerAngles.z);
         }
     }
 }
