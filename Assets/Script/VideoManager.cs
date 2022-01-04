@@ -7,6 +7,8 @@ public class VideoManager : MonoBehaviour
     UnityEngine.Video.VideoPlayer videoPlayer;
     public GameObject Character;
     public GameObject spotLight;
+    public GameObject plane;
+    public GameObject cam;
     bool isDestroyed = false;
     void Start()
     {
@@ -23,6 +25,10 @@ public class VideoManager : MonoBehaviour
             isDestroyed = true;
             Character.SetActive(true);
             spotLight.SetActive(true);
+            plane.SetActive(true);
+
+            spotLight.transform.position = cam.transform.position + 6 * cam.transform.forward;
+            spotLight.transform.position = new Vector3(spotLight.transform.position.x, 5.1f, spotLight.transform.position.z);
         }
     }
 }
