@@ -11,6 +11,7 @@ public class VideoManager : MonoBehaviour
     public GameObject plane;
     public GameObject cam;
     public GameObject FallDownCamera;
+    public float distance = 3f;
     bool isDestroyed = false;
     void Start()
     {
@@ -34,8 +35,9 @@ public class VideoManager : MonoBehaviour
             spotLight.SetActive(true);
             plane.SetActive(true);
             FallDownCamera.SetActive(false);
+            RenderSettings.fog = true;
 
-            spotLight.transform.position = cam.transform.position + 6 * cam.transform.forward;
+            spotLight.transform.position = cam.transform.position + distance * cam.transform.forward;
             spotLight.transform.position = new Vector3(spotLight.transform.position.x, 5.1f, spotLight.transform.position.z);
             spotLight.transform.eulerAngles = new Vector3(spotLight.transform.eulerAngles.x, cam.transform.eulerAngles.y, spotLight.transform.eulerAngles.z);
         }
