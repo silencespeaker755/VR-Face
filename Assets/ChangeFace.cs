@@ -36,7 +36,7 @@ public class ChangeFace : MonoBehaviour
     }
     IEnumerator controlCamera()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         tempCam.SetActive(false);
         cam.SetActive(true);
     }
