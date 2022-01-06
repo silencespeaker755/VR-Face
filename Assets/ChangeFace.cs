@@ -21,7 +21,7 @@ public class ChangeFace : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        // TODO: might need to check what other is
+        if (other.tag == "Player") return;
         Material targetMaterial = other.GetComponent<Renderer>().material;
         body.GetComponent<Renderer>().material.mainTexture = targetMaterial.mainTexture;
 
